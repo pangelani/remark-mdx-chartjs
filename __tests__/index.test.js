@@ -20,7 +20,7 @@ function testUseCase(useCase, options, expectCallback) {
     jsx: true,
   });
 
-  expectCallback(String(result), expectedResult);
+  expectCallback(result, expectedResult);
 
   return vfile;
 }
@@ -28,7 +28,8 @@ function testUseCase(useCase, options, expectCallback) {
 describe('remark-chartjs', () => {
   it('can handle code blocks without options', () => {
     testUseCase('code-block-without-options', undefined, (result, expectedResult) => {
-      expect(result).toEqual(expectedResult);
+      expect(String(result)).toEqual(expectedResult);
+      expect(result.messages[0].reason).toEqual('Code block replaced with chart.')
     });
   });
 
@@ -45,7 +46,8 @@ describe('remark-chartjs', () => {
         },
       },
       (result, expectedResult) => {
-        expect(result).toEqual(expectedResult);
+        expect(String(result)).toEqual(expectedResult);
+        expect(result.messages[0].reason).toEqual('Code block replaced with chart.')
       },
     );
   });
@@ -64,7 +66,8 @@ describe('remark-chartjs', () => {
         },
       },
       (result, expectedResult) => {
-        expect(result).toEqual(expectedResult);
+        expect(String(result)).toEqual(expectedResult);
+        expect(result.messages[0].reason).toEqual('Code block replaced with chart.')
       },
     );
   });
@@ -85,32 +88,36 @@ describe('remark-chartjs', () => {
         },
       },
       (result, expectedResult) => {
-        expect(result).toEqual(expectedResult);
+        expect(String(result)).toEqual(expectedResult);
       },
     );
   });
 
   it('cannot handle code blocks with missing data', () => {
     testUseCase('code-block-missing-data', undefined, (result, expectedResult) => {
-      expect(result).toEqual(expectedResult);
+      expect(String(result)).toEqual(expectedResult);
+      expect(result.messages[0].reason).toEqual('The following properties are required: type and data');
     });
   });
 
   it('cannot handle code blocks with missing type', () => {
     testUseCase('code-block-missing-type', undefined, (result, expectedResult) => {
-      expect(result).toEqual(expectedResult);
+      expect(String(result)).toEqual(expectedResult);
+      expect(result.messages[0].reason).toEqual('The following properties are required: type and data');
     });
   });
 
   it('code blocks without chartjs are ignored', () => {
     testUseCase('code-block-ignored', undefined, (result, expectedResult) => {
-      expect(result).toEqual(expectedResult);
+      expect(String(result)).toEqual(expectedResult);
+      expect(result.messages).toHaveLength(0)
     });
   });
 
   it('multiple code blocks only import once', () => {
     testUseCase('code-block-double', undefined, (result, expectedResult) => {
-      expect(result).toEqual(expectedResult);
+      expect(String(result)).toEqual(expectedResult);
+      expect(result.messages[0].reason).toEqual('Code block replaced with chart.')
     });
   });
 });
