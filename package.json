@@ -1,6 +1,6 @@
 {
   "name": "remark-mdx-chartjs",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "A remark plugin that replaces `chartjs` codeblocks with ChartJS Components (react-chartjs-2).",
   "keywords": [
     "remark",
