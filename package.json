@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "lint": "eslint lib",
-    "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest --coverage",
     "test:coverage": "node --experimental-vm-modules ./node_modules/.bin/jest --coverage --coverageReporters text text-summary"
   },
   "devDependencies": {
