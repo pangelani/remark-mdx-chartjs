@@ -1,11 +1,13 @@
 /*@jsxRuntime automatic @jsxImportSource react*/
 import {Chart} from 'react-chartjs-2';
 import 'chart.js/auto';
+import {Chart} from 'react-chartjs-2';
+import 'chart.js/auto';
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1"
   }, props.components);
-  return <><_components.h1>{"chartjs code block with options"}</_components.h1>{"\n"}<Chart type="bar" updateMode="none" data={true && ({
+  return <><_components.h1>{"chartjs code block without options"}</_components.h1>{"\n"}<Chart type="bar" data={true && ({
     "labels": ["January", "February", "March", "April", "May", "June", "July"],
     "datasets": [{
       "label": "Dataset 1",
@@ -16,13 +18,17 @@ function _createMdxContent(props) {
       "data": [4, 2, 11, 8, 6, 1, 4],
       "backgroundColor": "rgba(53, 162, 235, 0.5)"
     }]
-  })} options={true && ({
-    "plugins": {
-      "legend": {
-        "position": "top"
-      }
-    },
-    "responsive": false
+  })} />{"\n"}<_components.h1>{"only one import should be added"}</_components.h1>{"\n"}<Chart type="line" data={true && ({
+    "labels": ["January", "February", "March", "April", "May", "June", "July"],
+    "datasets": [{
+      "label": "Dataset 1",
+      "data": [0, 2, 6, 1, 7, 13, 2],
+      "backgroundColor": "rgba(255, 99, 132, 0.5)"
+    }, {
+      "label": "Dataset 2",
+      "data": [4, 2, 11, 8, 6, 1, 4],
+      "backgroundColor": "rgba(53, 162, 235, 0.5)"
+    }]
   })} /></>;
 }
 function MDXContent(props = {}) {

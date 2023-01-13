@@ -1,23 +1,26 @@
-const path = require('path');
-const fs = require('fs');
-const toVFile = require('to-vfile');
-const chartjs = require('../lib/');
-const { sync } = require('@mdx-js/mdx');
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { readFileSync, writeFileSync } from 'fs';
+import { readSync } from 'to-vfile';
+import { compileSync } from '@mdx-js/mdx';
 
-const fixturesDir = path.join(__dirname, '/fixtures');
+import chartjs from '../lib';
+
+// eslint-disable-next-line
+const fixturesDir = join(dirname(fileURLToPath(import.meta.url)), '/fixtures');
 
 function testUseCase(useCase, options, expectCallback) {
   const srcFile = `${fixturesDir}/${useCase}.md`;
   const expectedFile = `${fixturesDir}/${useCase}.expected.jsx`;
-  const vfile = toVFile.readSync(srcFile);
-  const expectedResult = fs.readFileSync(expectedFile).toString();
+  const vfile = readSync(srcFile);
+  const expectedResult = readFileSync(expectedFile).toString();
 
-  const result = sync(vfile, {
+  const result = compileSync(vfile, {
     remarkPlugins: [options ? [chartjs, options] : chartjs],
     jsx: true,
   });
 
-  expectCallback(result, expectedResult);
+  expectCallback(String(result), expectedResult);
 
   return vfile;
 }
@@ -78,11 +81,36 @@ describe('remark-chartjs', () => {
           Colors: true,
           Legend: true,
           Title: true,
+          SubTitle: false,
         },
       },
       (result, expectedResult) => {
         expect(result).toEqual(expectedResult);
       },
     );
+  });
+
+  it('cannot handle code blocks with missing data', () => {
+    testUseCase('code-block-missing-data', undefined, (result, expectedResult) => {
+      expect(result).toEqual(expectedResult);
+    });
+  });
+
+  it('cannot handle code blocks with missing type', () => {
+    testUseCase('code-block-missing-type', undefined, (result, expectedResult) => {
+      expect(result).toEqual(expectedResult);
+    });
+  });
+
+  it('code blocks without chartjs are ignored', () => {
+    testUseCase('code-block-ignored', undefined, (result, expectedResult) => {
+      expect(result).toEqual(expectedResult);
+    });
+  });
+
+  it('multiple code blocks only import once', () => {
+    testUseCase('code-block-double', undefined, (result, expectedResult) => {
+      expect(result).toEqual(expectedResult);
+    });
   });
 });

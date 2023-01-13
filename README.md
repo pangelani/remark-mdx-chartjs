@@ -43,69 +43,69 @@ plugins:
 The following script:
 
 ```js
-const fs = require('fs');
-const toVFile = require('to-vfile');
-const { sync } = require('@mdx-js/mdx');
+import { readFile } from 'fs/promises';
 
-const remarkMdxChartJS = require('remark-mdx-chartjs');
+import { compile } from '@mdx-js/mdx';
+import remarkMdxChartJS from 'remark-mdx-chartjs';
 
-const result = sync(toVFile.readSync('example.mdx'), {
-  remarkPlugins: [remarkMdxChartJS],
+const { contents } = await compile(await readFile('example.mdx'), {
   jsx: true,
+  remarkPlugins: [remarkMdxChartJS],
 });
-
-console.log(result);
+console.log(contents);
 ```
 
 Roughly yields:
 
 ```jsx
-/* @jsxRuntime classic */
-/* @jsx mdx */
-import 'chart.js/auto';
+/*@jsxRuntime automatic @jsxImportSource react*/
 import { Chart } from 'react-chartjs-2';
-
-const layoutProps = {};
-const MDXLayout = 'wrapper';
-export default function MDXContent({ components, ...props }) {
+import 'chart.js/auto';
+function _createMdxContent(props) {
+  const _components = Object.assign(
+    {
+      h1: 'h1',
+    },
+    props.components,
+  );
   return (
-    <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
-      <h1>{`chartjs code block`}</h1>
+    <>
+      <_components.h1>{'chartjs code block without options'}</_components.h1>
+      {'\n'}
       <Chart
-        type={'bar'}
-        options={{
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: true,
-              text: 'Chart.js Bar Chart',
-            },
-          },
-        }}
-        data={{
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-          datasets: [
-            {
-              label: 'Dataset 1',
-              data: [0, 2, 6, 1, 7, 13, 2],
-              backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            },
-            {
-              label: 'Dataset 2',
-              data: [4, 2, 11, 8, 6, 1, 4],
-              backgroundColor: 'rgba(53, 162, 235, 0.5)',
-            },
-          ],
-        }}
-        mdxType="Chart"
+        type="bar"
+        data={
+          true && {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [
+              {
+                label: 'Dataset 1',
+                data: [0, 2, 6, 1, 7, 13, 2],
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+              },
+              {
+                label: 'Dataset 2',
+                data: [4, 2, 11, 8, 6, 1, 4],
+                backgroundColor: 'rgba(53, 162, 235, 0.5)',
+              },
+            ],
+          }
+        }
       />
-    </MDXLayout>
+    </>
   );
 }
-MDXContent.isMDXComponent = true;
+function MDXContent(props = {}) {
+  const { wrapper: MDXLayout } = props.components || {};
+  return MDXLayout ? (
+    <MDXLayout {...props}>
+      <_createMdxContent {...props} />
+    </MDXLayout>
+  ) : (
+    _createMdxContent(props)
+  );
+}
+export default MDXContent;
 ```
 
 ### Options
@@ -115,6 +115,8 @@ MDXContent.isMDXComponent = true;
 Options passed to the `<Chart {...props} />` component. No options by default, if options are
 available as part of the code block data, these default options will be completely ignored.
 
+No options by default. ChartJS Properties used as default props for all Chart Components. Can be
+override in each individual code block.
 [See ChartJS docs for more information](https://react-chartjs-2.js.org/components/chart#props)
 
 #### `imports`
