@@ -1,12 +1,12 @@
 /*@jsxRuntime automatic @jsxImportSource react*/
-import {Chart, BarController, CategoryScale, LinearScale, BarElement, Colors, Legend, Title} from 'react-chartjs-2';
-import {Chart as ChartJs} from 'chart.js';
+import {Chart, BarController, CategoryScale, LinearScale, BarElement, Colors, Legend, Title} from "react-chartjs-2";
+import {Chart as ChartJs} from "chart.js";
 ChartJs.register(BarController, CategoryScale, LinearScale, BarElement, Colors, Legend, Title);
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1"
   }, props.components);
-  return <><_components.h1>{"chartjs code block with options"}</_components.h1>{"\n"}<Chart type="bar" data={true && ({
+  return <><_components.h1>{"chartjs code block with options"}</_components.h1>{"\n"}<Chart type="bar" data={{
     "labels": ["January", "February", "March", "April", "May", "June", "July"],
     "datasets": [{
       "label": "Dataset 1",
@@ -17,7 +17,7 @@ function _createMdxContent(props) {
       "data": [4, 2, 11, 8, 6, 1, 4],
       "backgroundColor": "rgba(53, 162, 235, 0.5)"
     }]
-  })} /></>;
+  }} /></>;
 }
 function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = props.components || ({});
