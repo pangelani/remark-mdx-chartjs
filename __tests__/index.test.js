@@ -1,10 +1,10 @@
-const path = require("path");
-const fs = require("fs");
-const toVFile = require("to-vfile");
-const chartjs = require("../lib/");
-const { sync } = require("@mdx-js/mdx");
+const path = require('path');
+const fs = require('fs');
+const toVFile = require('to-vfile');
+const chartjs = require('../lib/');
+const { sync } = require('@mdx-js/mdx');
 
-const fixturesDir = path.join(__dirname, "/fixtures");
+const fixturesDir = path.join(__dirname, '/fixtures');
 
 function testUseCase(useCase, options, expectCallback) {
   const srcFile = `${fixturesDir}/${useCase}.md`;
@@ -14,7 +14,7 @@ function testUseCase(useCase, options, expectCallback) {
 
   const result = sync(vfile, {
     remarkPlugins: [options ? [chartjs, options] : chartjs],
-    jsx: true
+    jsx: true,
   });
 
   expectCallback(result, expectedResult);
@@ -22,57 +22,53 @@ function testUseCase(useCase, options, expectCallback) {
   return vfile;
 }
 
-describe("remark-chartjs", () => {
-  it("can handle code blocks without options", () => {
-    testUseCase(
-      "code-block-without-options",
-      undefined,
-      function (result, expectedResult) {
-        expect(result).toEqual(expectedResult);
-      }
-    );
+describe('remark-chartjs', () => {
+  it('can handle code blocks without options', () => {
+    testUseCase('code-block-without-options', undefined, (result, expectedResult) => {
+      expect(result).toEqual(expectedResult);
+    });
   });
 
-  it("can handle code blocks with options", () => {
+  it('can handle code blocks with options', () => {
     testUseCase(
-      "code-block-with-options",
+      'code-block-with-options',
       {
         chartJs: {
           options: {
-            plugins: { legend: { position: "top" } },
-            responsive: false
+            plugins: { legend: { position: 'top' } },
+            responsive: false,
           },
-          updateMode: "none"
-        }
+          updateMode: 'none',
+        },
       },
-      function (result, expectedResult) {
+      (result, expectedResult) => {
         expect(result).toEqual(expectedResult);
-      }
+      },
     );
   });
 
-  it("can handle code blocks with options override", () => {
+  it('can handle code blocks with options override', () => {
     testUseCase(
-      "code-block-with-options-override",
+      'code-block-with-options-override',
       {
         chartJs: {
           options: {
-            plugins: { legend: { position: "top" } },
-            responsive: false
+            plugins: { legend: { position: 'top' } },
+            responsive: false,
           },
-          datasetIdKey: "key",
-          redraw: false
-        }
+          datasetIdKey: 'key',
+          redraw: false,
+        },
       },
-      function (result, expectedResult) {
+      (result, expectedResult) => {
         expect(result).toEqual(expectedResult);
-      }
+      },
     );
   });
 
-  it("can handle code blocks with specific imports", () => {
+  it('can handle code blocks with specific imports', () => {
     testUseCase(
-      "code-block-with-imports",
+      'code-block-with-imports',
       {
         imports: {
           BarController: true,
@@ -81,12 +77,12 @@ describe("remark-chartjs", () => {
           BarElement: true,
           Colors: true,
           Legend: true,
-          Title: true
-        }
+          Title: true,
+        },
       },
-      function (result, expectedResult) {
+      (result, expectedResult) => {
         expect(result).toEqual(expectedResult);
-      }
+      },
     );
   });
 });

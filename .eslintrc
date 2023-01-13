@@ -1,0 +1,16 @@
+{
+  "extends": "airbnb-base",
+  "root": true,
+  "env": {
+    "node": true,
+    "jest": true,
+    "browser": true,
+    "jasmine": true
+  },
+  "rules": {
+    "no-console": 0,
+    "no-loop-func": 0,
+    "import/no-extraneous-dependencies": 0,
+    "arrow-parens": 0
+  }
+}

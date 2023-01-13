@@ -1,6 +1,6 @@
 {
   "name": "remark-mdx-chartjs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A remark plugin that replaces `chartjs` codeblocks with ChartJS Components (react-chartjs-2).",
   "keywords": [
     "remark",
@@ -20,9 +20,9 @@
     "lib"
   ],
   "scripts": {
-    "lint": "$(npm bin)/eslint src",
-    "test": "$(npm bin)/jest",
-    "test:coverage": "$(npm bin)/jest --coverage --coverageReporters text text-summary"
+    "lint": "eslint lib",
+    "test": "jest",
+    "test:coverage": "jest --coverage --coverageReporters text text-summary"
   },
   "devDependencies": {
     "@mdx-js/mdx": "^1.6.22",
