@@ -1,18 +1,29 @@
 {
   "name": "remark-mdx-chartjs",
-  "version": "2.1.1",
+  "version": "2.2.0-rc",
   "description": "A remark plugin that replaces `chartjs` codeblocks with ChartJS Components (react-chartjs-2).",
   "keywords": [
     "remark",
     "markdown",
     "mdx",
-    "chartjs"
+    "chartjs",
+    "chart",
+    "remark-plugin",
+    "mdast",
+    "unified"
   ],
   "type": "module",
   "author": "Pablo Angelani <pablo.angelani@gmai.com>",
-  "homepage": "",
   "license": "MIT",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:pangelani/remark-mdx-chartjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pangelani/remark-mdx-chartjs/issues"
+  },
+  "homepage": "https://github.com/pangelani/remark-mdx-chartjs#readme",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
