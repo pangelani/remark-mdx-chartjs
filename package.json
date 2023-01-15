@@ -1,6 +1,6 @@
 {
   "name": "remark-mdx-chartjs",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A remark plugin that replaces `chartjs` codeblocks with ChartJS Components (react-chartjs-2).",
   "keywords": [
     "remark",
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/pangelani/remark-mdx-chartjs/issues"
   },
-  "homepage": "https://github.com/pangelani/remark-mdx-chartjs#readme",
+  "homepage": "https://pangelani.github.io/remark-mdx-chartjs",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
