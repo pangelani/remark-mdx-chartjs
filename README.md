@@ -8,6 +8,8 @@
 A [remark](https://remark.js.org) plugin that replaces `chartjs` code blocks with ChartJS Components
 (react-chartjs-2).
 
+[**See online docs for more info**](https://pangelani.github.io/remark-mdx-chartjs/)
+
 ## Installation
 
 ```sh
