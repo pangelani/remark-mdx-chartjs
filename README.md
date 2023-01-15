@@ -70,7 +70,6 @@ const MDXLayout = 'wrapper';
 export default function MDXContent({ components, ...props }) {
   return (
     <MDXLayout {...layoutProps} {...props} components={components} mdxType="MDXLayout">
-      <h1>{`chartjs code block`}</h1>
       <Chart
         type={'bar'}
         options={{
@@ -108,7 +107,33 @@ export default function MDXContent({ components, ...props }) {
 MDXContent.isMDXComponent = true;
 ```
 
-### Options
+### Code Block Metadata
+
+You can also specify some self-explanatory parameters inside the language metastring (leave a space
+after the language): 'width', 'height', 'center', and 'title'. The order is important! the `title`
+should always be the last.
+
+Example:
+
+````mdx
+```chartjs width=50% height=200px center title=RGB Pie Chart
+type: pie
+data:
+  labels: ["Red", "Green", "Blue"]
+  datasets:
+    - label: "Colors"
+      data: [1, 1, 1]
+      backgroundColor: [
+        "rgba(255, 0, 0, 0.5)",
+        "rgba(0, 255, 0, 0.5)",
+        "rgba(0, 0, 255, 0.5)",
+      ]
+options:
+  plugins: { legend: { position: 'bottom' } }
+```
+````
+
+### Plugin Options
 
 #### `chartjs.options`
 

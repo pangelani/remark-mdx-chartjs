@@ -85,4 +85,10 @@ describe('remark-chartjs', () => {
       },
     );
   });
+
+  it('can handle code blocks with meta inf', () => {
+    testUseCase('code-block-with-meta', undefined, (result, expectedResult) => {
+      expect(result).toEqual(expectedResult);
+    });
+  });
 });
