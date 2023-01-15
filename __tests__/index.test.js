@@ -120,4 +120,11 @@ describe('remark-chartjs', () => {
       expect(result.messages[0].reason).toEqual('Code block replaced with chart.')
     });
   });
+
+  it('can handle code blocks with meta inf', () => {
+    testUseCase('code-block-with-meta', undefined, (result, expectedResult) => {
+      expect(String(result)).toEqual(expectedResult);
+      expect(result.messages[0].reason).toEqual('Code block replaced with chart.')
+    });
+  });
 });
