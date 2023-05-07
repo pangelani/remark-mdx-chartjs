@@ -9,9 +9,10 @@
     "chartjs"
   ],
   "author": "Pablo Angelani <pablo.angelani@gmai.com>",
-  "homepage": "",
+  "homepage": "https://pangelani.github.io/remark-mdx-chartjs/",
   "license": "MIT",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -26,11 +27,13 @@
   },
   "devDependencies": {
     "@mdx-js/mdx": "^1.6.22",
+    "@types/mdast": "^3.0.11",
     "eslint": "^4.2.0",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.0.0",
     "jest": "^21.2.1",
     "to-vfile": "^2.1.2",
+    "unified": "^9.2.2",
     "vfile": "^2.2.0"
   },
   "dependencies": {
