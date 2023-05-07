@@ -1,5 +1,9 @@
-__tests__/
+coverage/
 dist/
 node_modules/
+website/
+*.d.ts
+*.js
 *.jsx
-website
+*.tgz
+*.md
